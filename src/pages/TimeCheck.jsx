@@ -5,8 +5,14 @@ const pad = (n) => String(n).padStart(2, '0')
 
 export default function TimeCheck({ onMidnight }) {
   const t = useISTTime()
-  useEffect(() => { if (t.status === 'ok' && t.isMidnightHour) onMidnight() }, [t.status, t.isMidnightHour, onMidnight])
+useEffect(() => {
+  if (t.status !== 'ok') return
 
+  // Today 6:00 PM IST onwards unlock
+  if (t.h >= 10) {
+    onMidnight()
+  }
+}, [t.status, t.h, onMidnight])
   const h12 = t.status === 'ok' ? (t.h % 12 || 12) : 0
   const cd = t.status === 'ok' ? Math.ceil(t.msToMidnight / 1000) : 0
 

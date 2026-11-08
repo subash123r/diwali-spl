@@ -12,7 +12,7 @@ export default function App() {
       {/* Background lives outside the pages, so it never restarts between them */}
       <Background grand={page === 'surprise'} />
       <main className="relative z-10 flex h-full items-center justify-center overflow-y-auto px-3 pb-36 pt-6">
-        {page === 'welcome' && <Welcome key="w" onYes={() => setPage('time')} />}
+        {page === 'welcome' && <Welcome key="w" onYes={() => setPage('surprise')} />}
         {page === 'time' && <TimeCheck key="t" onMidnight={unlock} />}
         {page === 'surprise' && <Surprise key="s" />}
       </main>
